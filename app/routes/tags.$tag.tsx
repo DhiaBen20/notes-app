@@ -1,47 +1,47 @@
-import { data, LoaderFunctionArgs } from "@remix-run/cloudflare";
+import { LoaderFunctionArgs, redirect } from "@remix-run/cloudflare";
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
+import { data } from "@remix-run/router";
+import { useParams } from "react-router";
 import { buttonClasses } from "~/components/Button";
-import InfoMessage from "~/notes/InfoMessage";
 import Header from "~/notes/Header";
 import Main from "~/notes/Main";
 import Nav from "~/notes/Nav";
 import Notes from "~/notes/Notes";
-import { requireAuth } from "~/utils/auth";
-import { fetchNotes, fetchTags } from "~/utils/notes";
+import { getAuthUser } from "~/utils/auth";
+import { fetchNotesByTag, fetchTags } from "~/utils/notes";
 
-export async function loader({ request, context }: LoaderFunctionArgs) {
+export async function loader({ request, context, params }: LoaderFunctionArgs) {
 	const { PROJECT_URL, SUPABASE_KEY } = context.cloudflare.env;
+	const user = await getAuthUser(PROJECT_URL, SUPABASE_KEY, request);
 
-	await requireAuth(PROJECT_URL, SUPABASE_KEY, request);
+	if (!user) return redirect("/login");
 
 	const tags = await fetchTags(PROJECT_URL, SUPABASE_KEY, request);
-	const notes = await fetchNotes(PROJECT_URL, SUPABASE_KEY, request);
+	const notes = await fetchNotesByTag(
+		PROJECT_URL,
+		SUPABASE_KEY,
+		request,
+		params.tag!
+	);
 
 	return data({ tags, notes });
 }
 
-export default function NotesPage() {
+export default function TagNotesPage() {
 	const { tags, notes } = useLoaderData<typeof loader>();
+	const { tag } = useParams();
 
 	return (
 		<div className="h-screen grid grid-cols-[17rem_1fr]">
 			<Nav tags={tags} />
 			<div className="flex flex-col">
-				<Header title={`All Notes`} />
+				<Header title={`Notes with tag: ${tag}`} />
 				<Main>
 					<div className="border-r px-3 pt-4 space-y-4">
 						<Link className={buttonClasses} to="create">
 							+ Create New Note
 						</Link>
-
-						{notes.length > 0 ? (
-							<Notes notes={notes} />
-						) : (
-							<InfoMessage>
-								You don&rsquo;t have any notes yet. Start a new
-								note to capture your thoughts and ideas.
-							</InfoMessage>
-						)}
+						<Notes notes={notes} />
 					</div>
 
 					<Outlet />

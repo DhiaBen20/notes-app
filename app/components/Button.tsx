@@ -1,5 +1,8 @@
 import { ComponentProps } from "react";
 
+export const buttonClasses =
+	"bg-blue-600 text-white transition-opacity duration-100 text-sm font-semibold py-2.5 rounded-lg px-6 flex items-center justify-center gap-4";
+
 export default function Button({
 	isLoading = false,
 	children,
@@ -8,9 +11,7 @@ export default function Button({
 	return (
 		<button
 			{...props}
-			className={`bg-blue-600 text-white transition-opacity duration-100 text-sm font-semibold py-2.5 rounded-lg px-6 flex items-center justify-center gap-4 ${
-				isLoading ? "opacity-80" : ""
-			}`}
+			className={`${buttonClasses} ${isLoading ? "opacity-80" : ""}`}
 			disabled={isLoading}
 		>
 			{isLoading && (
