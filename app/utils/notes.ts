@@ -1,3 +1,5 @@
+import { z } from "zod";
+import { NoteSchema } from "~/NoteForm/NoteSchema";
 import { supabaseClient } from "./supabase";
 
 export async function fetchNotes(
@@ -54,4 +56,15 @@ export async function fetchNotesByTag(
 	if (notesResponse.error) throw notesResponse.error;
 
 	return notesResponse.data;
+}
+
+export async function createNote(
+	PROJECT_URL: string,
+	SUPABASE_KEY: string,
+	request: Request,
+	payload: z.infer<typeof NoteSchema> & { user_id: string }
+) {
+	const supabase = supabaseClient(PROJECT_URL, SUPABASE_KEY, request);
+
+	return await supabase.from("notes").insert(payload).select().single();
 }
