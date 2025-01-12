@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { NoteSchema } from "~/NoteForm/NoteSchema";
 import { supabaseClient } from "./supabase";
+import { Tables } from "~/types/supabase";
 
 export async function fetchNotes(
 	PROJECT_URL: string,
@@ -67,4 +68,23 @@ export async function createNote(
 	const supabase = supabaseClient(PROJECT_URL, SUPABASE_KEY, request);
 
 	return await supabase.from("notes").insert(payload).select().single();
+}
+
+export async function fetchNoteById(
+	PROJECT_URL: string,
+	SUPABASE_KEY: string,
+	request: Request,
+	id: Tables<"notes">["id"]
+) {
+	const supabase = supabaseClient(PROJECT_URL, SUPABASE_KEY, request);
+
+	const noteResponse = await supabase
+		.from("notes")
+		.select("*")
+		.eq("id", id)
+		.single();
+
+	if (noteResponse.error) throw noteResponse.error;
+
+	return noteResponse.data;
 }

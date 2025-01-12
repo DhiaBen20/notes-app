@@ -1,17 +1,46 @@
 import { ComponentProps } from "react";
 
-export const buttonClasses =
-	"bg-blue-600 text-white transition-opacity duration-100 text-sm font-semibold py-2.5 rounded-lg px-6 flex items-center justify-center gap-4";
+const secondaryClasses = "border-2 text-zinc-800";
+const primaryClasses = "bg-blue-600 text-white transition-opacity duration-100";
+
+const defaultClasses =
+	"text-sm font-semibold px-6 py-2.5 rounded-lg flex items-center gap-4 capitalize";
+const alignClasses = {
+	center: "justify-center",
+	start: "justify-start",
+};
+
+export function buttonStyles({
+    align = "center",
+    isLoading = false,
+    variant = "primary",
+}: {
+    isLoading?: ButtonProps["isLoading"];
+    variant?: ButtonProps["variant"];
+    align?: ButtonProps["align"];
+} = {}) {
+    return `${defaultClasses} ${
+        variant === "primary" ? primaryClasses : secondaryClasses
+    } ${isLoading ? "opacity-80" : ""} ${alignClasses[align]}`;
+}
+
+type ButtonProps = {
+	isLoading?: boolean;
+	variant?: "primary" | "secondary";
+	align?: "center" | "start";
+} & ComponentProps<"button">;
 
 export default function Button({
+	variant = "primary",
 	isLoading = false,
+	align = "center",
 	children,
 	...props
-}: { isLoading?: boolean } & ComponentProps<"button">) {
+}: ButtonProps) {
 	return (
 		<button
 			{...props}
-			className={`${buttonClasses} ${isLoading ? "opacity-80" : ""}`}
+			className={buttonStyles({ variant, isLoading, align })}
 			disabled={isLoading}
 		>
 			{isLoading && (

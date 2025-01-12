@@ -1,6 +1,6 @@
 import { data, LoaderFunctionArgs } from "@remix-run/cloudflare";
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
-import { buttonClasses } from "~/components/Button";
+import { buttonStyles } from "~/components/Button";
 import InfoMessage from "~/notes/InfoMessage";
 import Header from "~/notes/Header";
 import Main from "~/notes/Main";
@@ -30,7 +30,7 @@ export default function NotesPage() {
 				<Header title={`All Notes`} />
 				<Main>
 					<div className="border-r px-3 pt-4 space-y-4">
-						<Link className={buttonClasses} to="create">
+						<Link className={buttonStyles()} to="create">
 							+ Create New Note
 						</Link>
 

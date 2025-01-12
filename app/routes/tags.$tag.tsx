@@ -2,7 +2,7 @@ import { LoaderFunctionArgs, redirect } from "@remix-run/cloudflare";
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
 import { data } from "@remix-run/router";
 import { useParams } from "react-router";
-import { buttonClasses } from "~/components/Button";
+import { buttonStyles } from "~/components/Button";
 import Header from "~/notes/Header";
 import Main from "~/notes/Main";
 import Nav from "~/notes/Nav";
@@ -38,7 +38,7 @@ export default function TagNotesPage() {
 				<Header title={`Notes with tag: ${tag}`} />
 				<Main>
 					<div className="border-r px-3 pt-4 space-y-4">
-						<Link className={buttonClasses} to="create">
+						<Link className={buttonStyles()} to="create">
 							+ Create New Note
 						</Link>
 						<Notes notes={notes} />

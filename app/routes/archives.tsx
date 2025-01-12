@@ -1,8 +1,8 @@
 import { data, LoaderFunctionArgs, redirect } from "@remix-run/cloudflare";
-import { Outlet, useLoaderData, Link } from "@remix-run/react";
-import { buttonClasses } from "~/components/Button";
-import InfoMessage from "~/notes/InfoMessage";
+import { Link, Outlet, useLoaderData } from "@remix-run/react";
+import { buttonStyles } from "~/components/Button";
 import Header from "~/notes/Header";
+import InfoMessage from "~/notes/InfoMessage";
 import Main from "~/notes/Main";
 import Nav from "~/notes/Nav";
 import Notes from "~/notes/Notes";
@@ -31,7 +31,7 @@ export default function ArchivesPage() {
 				<Header title="Archived notes" />
 				<Main>
 					<div className="border-r px-3 pt-4 space-y-4">
-						<Link className={buttonClasses} to="create">
+						<Link className={buttonStyles()} to="create">
 							+ Create New Note
 						</Link>
 						<p className="text-sm text-zinc-700">
