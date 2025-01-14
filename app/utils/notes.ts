@@ -88,3 +88,20 @@ export async function fetchNoteById(
 
 	return noteResponse.data;
 }
+
+export async function updateNote(
+	PROJECT_URL: string,
+	SUPABASE_KEY: string,
+	request: Request,
+	id: Tables<"notes">["id"],
+	payload: Partial<z.infer<typeof NoteSchema>>
+) {
+	const supabase = supabaseClient(PROJECT_URL, SUPABASE_KEY, request);
+
+	return await supabase
+		.from("notes")
+		.update(payload)
+		.eq("id", id)
+		.select()
+		.single();
+}

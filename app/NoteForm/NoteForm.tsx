@@ -1,15 +1,18 @@
-import { Form, useNavigation } from "@remix-run/react";
-import { useNoteForm } from "./useNoteForm";
-import Errors from "~/components/Errors";
-import Label from "~/components/Label";
-import Input from "~/components/Input";
-import Button from "~/components/Button";
 import { SubmissionResult } from "@conform-to/react";
+import { Form, useNavigation } from "@remix-run/react";
+import Button from "~/components/Button";
+import Errors from "~/components/Errors";
+import Input from "~/components/Input";
+import Label from "~/components/Label";
 import TextArea from "~/components/TextArea";
+import { Tables } from "~/types/supabase";
+import { useNoteForm } from "./useNoteForm";
 
 export default function NoteForm({
+	note: oldNote,
 	submission,
 }: {
+	note?: Tables<"notes">;
 	submission?: SubmissionResult;
 }) {
 	const {
@@ -24,7 +27,11 @@ export default function NoteForm({
 			<Errors errorId={form.errorId} errors={form.errors} />
 			<div className="flex flex-col gap-1">
 				<Label htmlFor={title.id}>Title</Label>
-				<Input placeholder="e.g., My First Note" {...title} />
+				<Input
+					placeholder="e.g., My First Note"
+					defaultValue={oldNote ? oldNote.title : undefined}
+					{...title}
+				/>
 				<Errors
 					errorId={fields.title.errorId}
 					errors={fields.title.errors}
@@ -39,6 +46,7 @@ export default function NoteForm({
 					{...tags}
 					placeholder="e.g., work, personal, ideas"
 					aria-describedby="tags-desc"
+					defaultValue={oldNote ? oldNote.tags : undefined}
 				/>
 				<Errors
 					errorId={fields.tags.errorId}
@@ -51,6 +59,7 @@ export default function NoteForm({
 					{...note}
 					rows={6}
 					placeholder="Write your note here..."
+					defaultValue={oldNote ? oldNote.content : undefined}
 				/>
 				<Errors
 					errorId={fields.content.errorId}
