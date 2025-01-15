@@ -1,49 +1,55 @@
 import { ComponentProps } from "react";
 
-const secondaryClasses = "border-2 text-zinc-800";
-const primaryClasses = "bg-blue-600 text-white transition-opacity duration-100";
-
-const defaultClasses =
-	"text-sm font-semibold px-6 py-2.5 rounded-lg flex items-center gap-4 capitalize";
+const initialClasses =
+	"text-sm font-semibold px-6 py-2.5 rounded-lg flex items-center gap-4 capitalize transition-opacity duration-100";
+const loadingClasses = "opacity-80";
 const alignClasses = {
-	center: "justify-center",
 	start: "justify-start",
+	center: "justify-center",
+} as const;
+
+const colorClasses = {
+	red: "bg-red-500 text-white hover:bg-red-600",
+	blue: "bg-blue-600 text-white hover:bg-blue-700",
+	transparent: "bg-zinc-50 hover:bg-zinc-100",
 };
+const outlinedClasses = "border-2 text-zinc-800";
 
 export function buttonStyles({
-    align = "center",
-    isLoading = false,
-    variant = "primary",
+	loading = false,
+	align = "center",
+	shape = "pill",
+	color = "blue",
 }: {
-    isLoading?: ButtonProps["isLoading"];
-    variant?: ButtonProps["variant"];
-    align?: ButtonProps["align"];
+	shape?: "pill" | "outlined";
+	color?: "blue" | "red" | "transparent";
+	align?: "start" | "center";
+	loading?: boolean;
 } = {}) {
-    return `${defaultClasses} ${
-        variant === "primary" ? primaryClasses : secondaryClasses
-    } ${isLoading ? "opacity-80" : ""} ${alignClasses[align]}`;
+	return `${initialClasses} ${loading ? loadingClasses : ""} ${
+		align ? alignClasses[align] : ""
+	} ${shape === "pill" && color ? colorClasses[color] : outlinedClasses}`;
 }
 
-type ButtonProps = {
-	isLoading?: boolean;
-	variant?: "primary" | "secondary";
-	align?: "center" | "start";
-} & ComponentProps<"button">;
-
 export default function Button({
-	variant = "primary",
-	isLoading = false,
-	align = "center",
 	children,
+	shape = "pill",
+	color = "blue",
+	align = "center",
+	loading = false,
 	...props
-}: ButtonProps) {
+}: ComponentProps<"button"> & {
+	shape?: "pill" | "outlined";
+	color?: "blue" | "red" | "transparent";
+	align?: "start" | "center";
+	loading?: boolean;
+}) {
 	return (
 		<button
+			className={buttonStyles({ align, color, loading, shape })}
 			{...props}
-			className={buttonStyles({ variant, isLoading, align })}
-			disabled={isLoading}
 		>
-			{isLoading && (
+			{loading && (
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 24 24"

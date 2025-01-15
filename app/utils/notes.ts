@@ -94,7 +94,7 @@ export async function updateNote(
 	SUPABASE_KEY: string,
 	request: Request,
 	id: Tables<"notes">["id"],
-	payload: Partial<z.infer<typeof NoteSchema>>
+	payload: Partial<Tables<"notes">>
 ) {
 	const supabase = supabaseClient(PROJECT_URL, SUPABASE_KEY, request);
 
@@ -104,4 +104,15 @@ export async function updateNote(
 		.eq("id", id)
 		.select()
 		.single();
+}
+
+export async function deleteNote(
+	PROJECT_URL: string,
+	SUPABASE_KEY: string,
+	request: Request,
+	id: Tables<"notes">["id"]
+) {
+	const supabase = supabaseClient(PROJECT_URL, SUPABASE_KEY, request);
+
+	return await supabase.from("notes").delete().eq("id", id);
 }

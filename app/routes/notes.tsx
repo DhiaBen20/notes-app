@@ -1,6 +1,6 @@
 import { data, LoaderFunctionArgs } from "@remix-run/cloudflare";
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
-import { buttonStyles } from "~/components/Button";
+
 import InfoMessage from "~/notes/InfoMessage";
 import Header from "~/notes/Header";
 import Main from "~/notes/Main";
@@ -8,6 +8,7 @@ import Nav from "~/notes/Nav";
 import Notes from "~/notes/Notes";
 import { requireAuth } from "~/utils/auth";
 import { fetchNotes, fetchTags } from "~/utils/notes";
+import { buttonStyles } from "~/components/Button";
 
 export async function loader({ request, context }: LoaderFunctionArgs) {
 	const { PROJECT_URL, SUPABASE_KEY } = context.cloudflare.env;
