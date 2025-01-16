@@ -45,7 +45,7 @@ export function AuthForm({
 				/>
 			</div>
 			<div className="flex flex-col">
-				<Button isLoading={navigation.formData?.has("auth")}>
+				<Button loading={navigation.formData?.has("auth")}>
 					{buttonLabel}
 				</Button>
 			</div>

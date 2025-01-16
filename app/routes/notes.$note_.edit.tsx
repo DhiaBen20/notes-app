@@ -57,9 +57,9 @@ export default function NoteCreatePage() {
 	const actionData = useActionData<typeof action>();
 
 	return (
-		<div className="grid grid-cols-[1fr_17rem] h-full">
-			<div className="border-r px-6">
-				<h2 className="font-bold text-xl pt-5 mb-8">
+		<div className="grid grid-cols-[1fr_17rem] h-full dark:bg-slate-950">
+			<div className="border-r dark:border-slate-800 px-6">
+				<h2 className="font-bold text-xl pt-5 mb-8 dark:text-neutral-200">
 					Edit Note: {loaderData.note.title}
 				</h2>
 				<NoteForm

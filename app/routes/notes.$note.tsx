@@ -20,7 +20,7 @@ export default function NotePage() {
 	const { note } = useLoaderData<typeof loader>();
 
 	return (
-		<div className="h-full grid grid-cols-[1fr_17rem]">
+		<div className="h-full grid grid-cols-[1fr_17rem] dark:bg-slate-950">
 			<NoteDetails note={note} />
 			<NoteControls isArchived={Boolean(note.archived)} />
 		</div>

@@ -30,9 +30,9 @@ export default function NotesPage() {
 			<div className="flex flex-col">
 				<Header title={`All Notes`} />
 				<Main>
-					<div className="border-r px-3 pt-4 space-y-4">
+					<div className="dark:bg-slate-950 dark:border-slate-800 border-r px-3 pt-4 space-y-4">
 						<Link className={buttonStyles()} to="create">
-							+ Create New Note
+							+ Create New Note 
 						</Link>
 
 						{notes.length > 0 ? (

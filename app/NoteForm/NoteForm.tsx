@@ -39,7 +39,7 @@ export default function NoteForm({
 			</div>
 			<div className="flex flex-col gap-1">
 				<Label htmlFor={tags.id}>Tags</Label>
-				<p className="text-zinc-500 text-sm" id="tags-desc">
+				<p className="text-zinc-500 text-sm dark:text-neutral-400" id="tags-desc">
 					Separate multiple tags with a comma
 				</p>
 				<Input
@@ -68,7 +68,7 @@ export default function NoteForm({
 			</div>
 
 			<Button
-				isLoading={
+				loading={
 					navigation.formMethod === "POST" &&
 					navigation.state === "submitting"
 				}

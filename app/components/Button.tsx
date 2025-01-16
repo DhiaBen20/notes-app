@@ -11,9 +11,9 @@ const alignClasses = {
 const colorClasses = {
 	red: "bg-red-500 text-white hover:bg-red-600",
 	blue: "bg-blue-600 text-white hover:bg-blue-700",
-	transparent: "bg-zinc-50 hover:bg-zinc-100",
+	transparent: "bg-zinc-50 hover:bg-zinc-100 dark:bg-slate-600 dark:hover:bg-slate-700 dark:text-neutral-400",
 };
-const outlinedClasses = "border-2 text-zinc-800";
+const outlinedClasses = "border-2 text-zinc-800 dark:border-slate-800 dark:text-neutral-400";
 
 export function buttonStyles({
 	loading = false,

@@ -39,7 +39,7 @@ export default function NoteCreatePage() {
 
 	return (
 		<div className="grid grid-cols-[1fr_17rem] h-full">
-			<div className="border-r px-6">
+			<div className="border-r dark:border-slate-800 px-6">
 				<h2 className="font-bold text-xl pt-5 mb-8">Create Note</h2>
 				<NoteForm
 					submission={

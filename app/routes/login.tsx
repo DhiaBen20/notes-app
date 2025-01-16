@@ -64,8 +64,8 @@ export default function Login() {
 	return (
 		<Layout>
 			<div className="mb-8">
-				<h1 className="text-center font-bold text-2xl">Login</h1>
-				<p className="text-center font-medium text-sm text-gray-600">
+				<h1 className="text-center font-bold text-2xl dark:text-neutral-300">Login</h1>
+				<p className="text-center font-medium text-sm text-gray-600 dark:text-zinc-500">
 					Don&apos;t have an account?{" "}
 					<Link to={"/register"} className="text-blue-600">
 						create an account.

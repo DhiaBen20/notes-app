@@ -37,7 +37,7 @@ export default function TagNotesPage() {
 			<div className="flex flex-col">
 				<Header title={`Notes with tag: ${tag}`} />
 				<Main>
-					<div className="border-r px-3 pt-4 space-y-4">
+					<div className="dark:bg-slate-950 dark:border-slate-800 border-r px-3 pt-4 space-y-4">
 						<Link className={buttonStyles()} to="create">
 							+ Create New Note
 						</Link>

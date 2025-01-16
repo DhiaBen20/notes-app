@@ -30,11 +30,11 @@ export default function ArchivesPage() {
 			<div className="flex flex-col">
 				<Header title="Archived notes" />
 				<Main>
-					<div className="border-r px-3 pt-4 space-y-4">
+					<div className="dark:bg-slate-950 dark:border-slate-800 border-r px-3 pt-4 space-y-4">
 						<Link className={buttonStyles()} to="create">
 							+ Create New Note
 						</Link>
-						<p className="text-sm text-zinc-700">
+						<p className="text-sm text-zinc-700 dark:text-neutral-400">
 							All your archived notes are stored here. You can
 							restore or delete them anytime.
 						</p>

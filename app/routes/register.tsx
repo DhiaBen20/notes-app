@@ -64,8 +64,8 @@ export default function Register() {
 	return (
 		<Layout>
 			<div className="mb-8">
-				<h1 className="text-center font-bold text-2xl">Register</h1>
-				<p className="text-center font-medium text-sm text-gray-600">
+				<h1 className="text-center font-bold text-2xl dark:text-neutral-300">Register</h1>
+				<p className="text-center font-medium text-sm text-gray-600 dark:text-zinc-500">
 					Already have an account?{" "}
 					<Link to={"/login"} className="text-blue-600">
 						login.

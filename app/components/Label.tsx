@@ -5,7 +5,7 @@ export default function Label({ htmlFor, ...props }: ComponentProps<"label">) {
 		<label
 			{...props}
 			htmlFor={htmlFor}
-			className="text-sm text-gray-700 font-medium"
+			className="text-sm text-gray-700 font-medium dark:text-neutral-400"
 		/>
 	);
 }
