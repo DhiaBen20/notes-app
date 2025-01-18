@@ -6,11 +6,15 @@ import {
 	Outlet,
 	Scripts,
 	ScrollRestoration,
+	useNavigation,
 	useRouteLoaderData,
 } from "@remix-run/react";
 
 import { getThemeValue } from "./cookies/theme.server";
 import "./tailwind.css";
+import { useEffect } from "react";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
 
 export const links: LinksFunction = () => [
 	{ rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -33,7 +37,17 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export function Layout({ children }: { children: React.ReactNode }) {
 	const data = useRouteLoaderData<typeof loader>("root");
+	const navigation = useNavigation();
 
+	useEffect(() => {
+		NProgress.configure({ showSpinner: false });
+	}, []);
+
+	if (navigation.state === "loading") {
+		NProgress.start();
+	} else if (navigation.state === "idle") {
+		NProgress.done();
+	}
 	return (
 		<html lang="en" className={data?.theme === "dark" ? "dark" : ""}>
 			<head>
